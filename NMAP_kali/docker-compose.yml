@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  kali-interactive:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # Allocate a pseudo-TTY and keep stdin open for interactive use
+    # These are important for getting a working bash shell
+    tty: true
+    stdin_open: true
+    # No command specified here. We will use 'docker-compose run' to
+    # specify the initial command (/bin/bash) and make it interactive.
+    # No ports or networks needed for this simple interactive setup.
+    networks: 
+      - kali-network
+
+networks:
+  kali-network:
+    driver: bridge
